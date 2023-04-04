@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ['user', 'guide', 'lead-guide', 'admin'],
-    default: 'user',
+    default: `${__dirname}/../../public/img/users/default.jpg`,
   },
   password: {
     type: String,
