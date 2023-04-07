@@ -27,7 +27,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
           product_data: {
             name: `${tour.name} Tour`,
             description: tour.summary,
-            images: [`https://www.natours.dev/img/tours/${tour.imageCover}`],
+            images: [`${req.protocol}://${req.get('host')}/img/tours/${tour.imageCover}`],
           },
         },
         quantity: 1,
@@ -58,14 +58,12 @@ const createBookingCheckout = async (session) => {
 exports.webhookCheckout = (req, res, next) => {
   const sig = req.headers['stripe-signature'];
   let event;
-  console.log(sig);
   try {
     event = stripe.webhooks.constructEvent(
       req.body,
       sig,
       process.env.WEBHOOK_SECRET
     );
-    console.log(event);
   } catch (err) {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
