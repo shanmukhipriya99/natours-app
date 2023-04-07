@@ -20,12 +20,12 @@ const userSchema = new mongoose.Schema({
   },
   photo: {
     type: String,
-    default: 'defailt.jpeg',
+    default: `${__dirname}/../../public/img/users/default.jpg`,
   },
   role: {
     type: String,
     enum: ['user', 'guide', 'lead-guide', 'admin'],
-    default: `${__dirname}/../../public/img/users/default.jpg`,
+    default: 'user',
   },
   password: {
     type: String,
